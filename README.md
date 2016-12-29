@@ -2,6 +2,7 @@
 
 #Cricket Game Simulation
 import random
+import matplotlib.pyplot as plt
 #name = input('Welcome to Pycricket! And your name is..?')
 #default name for now is Gucci (non-interactive)
 name = "Gucci"
@@ -36,18 +37,22 @@ def cric():
     elif x==7:
         print (name + " is comprehensively beaten by a viscious in-swinger. That's the end of your innings")
         b = 6
-    else:
-        print "Unexpected rain delay folks"
         
-#while loop to cycle back into the function in order to simulate an over (6 pitches in an over)
-b = 0
+#while loop to cycle back into the function in order to simulate an over (6 pitches max in an over)
+#two lists created for ball and runs to create a graph 
+ball = []
+runs = []
+b = 1
 total = 0
-while b<6:
+while b<7:
     cric()
+    ball.append(b)
     if x != 7 and x != 5:
         total = (x) + total
+        runs.append(x)
     else:
         total = total
+        runs.append(0)
     b += 1
 
 #concluding message based on results (runs scored)
@@ -58,3 +63,10 @@ elif 10 < total < 20:
     print "Thats decent homie"
 elif total > 20:
     print "Rocking performance mate!"
+#creating a customized graph based on performance using the lists created (ball and runs)    
+plt.bar(ball,runs, color = 'g', linewidth = 3)
+plt.title('Your Game Summary!')
+plt.xlabel('Ball #')
+plt.ylabel('Runs')
+plt.style.use('dark_background')
+plt.show()
